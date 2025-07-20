@@ -26,6 +26,8 @@
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle",
+    "build:studio": "remotion bundle --public-path=\"./\"",
+    "deploy": "npm run build:studio && wrangler pages deploy build",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc"
   },
