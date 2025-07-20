@@ -1,45 +1,77 @@
 import "./index.css";
 import { Composition } from "remotion";
-import { HelloWorld, myCompSchema } from "./HelloWorld";
-import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
-
-// Each <Composition> is an entry in the sidebar!
+import { AnimatedTitle, animatedTitleSchema } from "./compositions/AnimatedTitle";
+import { TitleWithDescription, titleWithDescriptionSchema } from "./compositions/TitleWithDescription";
+import { TwoImages, twoImagesSchema } from "./compositions/TwoImages";
+import { BarChart, barChartSchema } from "./compositions/BarChart";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        // You can take the "id" to render a video:
-        // npx remotion render src/index.ts <id> out/video.mp4
-        id="HelloWorld"
-        component={HelloWorld}
-        durationInFrames={150}
+        id="AnimatedTitle"
+        component={AnimatedTitle}
+        durationInFrames={120}
         fps={30}
         width={1920}
         height={1080}
-        // You can override these props for each render:
-        // https://www.remotion.dev/docs/parametrized-rendering
-        schema={myCompSchema}
+        schema={animatedTitleSchema}
         defaultProps={{
-          titleText: "Welcome to Remotion",
-          titleColor: "#000000",
-          logoColor1: "#91EAE4",
-          logoColor2: "#86A8E7",
+          title: "Amazing Title",
+          color: "#000000",
         }}
       />
 
-      {/* Mount any React component to make it show up in the sidebar and work on it individually! */}
       <Composition
-        id="OnlyLogo"
-        component={Logo}
+        id="TitleWithDescription"
+        component={TitleWithDescription}
         durationInFrames={150}
         fps={30}
         width={1920}
         height={1080}
-        schema={myCompSchema2}
+        schema={titleWithDescriptionSchema}
         defaultProps={{
-          logoColor1: "#91dAE2" as const,
-          logoColor2: "#86A8E7" as const,
+          title: "Main Title",
+          description: "This is a detailed description that explains the content",
+          titleColor: "#000000",
+          descriptionColor: "#666666",
+        }}
+      />
+
+      <Composition
+        id="TwoImages"
+        component={TwoImages}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={twoImagesSchema}
+        defaultProps={{
+          image1Url: "https://picsum.photos/800/600?random=1",
+          image2Url: "https://picsum.photos/800/600?random=2",
+          fullSize: true,
+          borderRadius: 12,
+        }}
+      />
+
+      <Composition
+        id="BarChart"
+        component={BarChart}
+        durationInFrames={180}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={barChartSchema}
+        defaultProps={{
+          title: "Sales Data",
+          data: [
+            { label: "Q1", value: 75 },
+            { label: "Q2", value: 85 },
+            { label: "Q3", value: 65 },
+            { label: "Q4", value: 95 },
+          ],
+          barColor: "#3B82F6",
+          titleColor: "#000000",
         }}
       />
     </>

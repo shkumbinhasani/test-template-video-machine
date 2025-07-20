@@ -1,0 +1,23 @@
+name: Deploy Remotion studio
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+permissions:
+  contents: write
+jobs:
+  render:
+    name: Render video
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: install packages
+        run: npm i
+      - name: Bundle Studio
+        run: npx remotion bundle --public-path="./"
+      - name: Deploy Studio
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
